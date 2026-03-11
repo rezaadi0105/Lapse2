@@ -197,7 +197,7 @@ const main_core = 7;
 const num_grooms = 0x200;
 const num_handles = 0x100;
 const num_sds = 0x100; // max is 0x100 due to max IPV6_TCLASS
-const num_alias = 20;
+const num_alias = 100;
 const num_races = 100;
 const leak_len = 16;
 const num_leaks = 5;
@@ -1590,7 +1590,7 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
   // assume start of loadable segments is at offset 0x1000
   const patches = new View1(await buf, 0x1000);
   let map_size = patches.size;
-  const max_size = 0x10000000;
+  const max_size = 0x500000; // (adjust if your payload is larger)
   if (map_size > max_size) {
     die(`patch file too large (>${max_size}): ${map_size}`);
   }
